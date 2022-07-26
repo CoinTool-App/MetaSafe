@@ -13,5 +13,10 @@
         "name": "Uniswap Hacker",
         "chain": "eth",
         "address": "0xCf39B7793512F03f2893C16459fd72E65D2Ed00c"
+    },
+    {
+        "name": "test",
+        "chain": "bsc",
+        "address": "0xCf39B7793512F03f2893C16459fd72E65D2Ed00c"
     }
 ]
