@@ -1,7 +1,17 @@
 [
     {
-        "name": "test",
+        "name": "Uniswap Hacker",
         "chain": "eth",
-        "address": "0xE6472774DF8b1C5A253789D724d065c96e51e49F"
+        "address": "0x3cafc86a98b77eedcd3db0ee0ae562d7fe1897a2"
+    },
+    {
+        "name": "Uniswap Hacker",
+        "chain": "eth",
+        "address": "0x09b5027ef3a3b7332ee90321e558bad9c4447afa"
+    },
+    {
+        "name": "Uniswap Hacker",
+        "chain": "eth",
+        "address": "0xCf39B7793512F03f2893C16459fd72E65D2Ed00c"
     }
 ]
