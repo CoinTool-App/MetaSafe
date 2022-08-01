@@ -1,8 +1,7 @@
-<p align="center">
-English | [简体中文](https://github.com/CoinTool-App/MetaSafe/blob/main/README_zh.md)
-</p>
-
 ![](https://cdn.jsdelivr.net/gh/CoinTool-App/MetaSafe/doc/images/poster1.png)
+<p align="center">
+English | <a href="https://github.com/CoinTool-App/MetaSafe/blob/main/README_zh.md">简体中文</a>
+</p>
 # CoinTool - MetaSafe
 
 CoinTool - MetaSafe is a WEB 3.0 browser plugin against malicious approve and transfers, providing users with asset security! In the recent security incidents, we found that many users are threatened by malicious websites, phishing websites and web page hangings, causing significant loss of blockchain assets, including not limited to Token, NFT, etc. After our research, we developed this plug-in, which can intercept all calls to MetaMask behavior and analyze them for tips, providing global users with WEB3.0 Asset security protection!
@@ -15,9 +14,9 @@ Cointool - MetaSafe will intercept all approve and send Transaction, etc., will 
 
 ## Contribute
 
-[Submit whitelist or blacklist issues](https://github.com/CoinTool-App/MetaSafe/issues/new) 
-[Submit bug or suggest issue](https://github.com/CoinTool-App/MetaSafe/issues/new) 
-[DEMO](https://github.com/CoinTool-App/MetaSafe/issues/2) 
+[Submit whitelist or blacklist issues](https://github.com/CoinTool-App/MetaSafe/issues/new)  
+[Submit bug or suggest issue](https://github.com/CoinTool-App/MetaSafe/issues/new)  
+[DEMO](https://github.com/CoinTool-App/MetaSafe/issues/2)  
 
 ## About CoinTool
 
