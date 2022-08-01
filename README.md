@@ -8,7 +8,7 @@ English | <a href="https://github.com/CoinTool-App/MetaSafe/blob/main/README_zh.
 CoinTool - MetaSafe is a WEB 3.0 browser plugin against malicious approve and transfers, providing users with asset security! In the recent security incidents, we found that many users are threatened by malicious websites, phishing websites and web page hangings, causing significant loss of blockchain assets, including not limited to Token, NFT, etc. After our research, we developed this plug-in, which can intercept all calls to MetaMask behavior and analyze them for tips, providing global users with WEB3.0 Asset security protection!
 
 ## Download Install 
-[Google extended](https://cointool.app)
+[Google extended](https://chrome.google.com/webstore/detail/cointool-metasafe/adoeinlolcjogennbgahohnjeckanaeb)
 
 ## What is a threat site?
 In the blockchain world, it is like a deep dark forest. Threat sites will try to get your assets by various means, including but not limited to disguising as well-known defi protocol sites, NFT sites, poisoning in well-known sites, etc. to induce or hijack users to send or authorize their assets to malicious addresses!
