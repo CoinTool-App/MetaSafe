@@ -123,7 +123,7 @@ export default class ProxyEthereum extends React.Component {
         this.hideContainer()
     }
 
-    async getDomainSafeType(_domain) {
+    async getDomainSafeType(_domain = '') {
         const { domain_blacklist, domain_whitelist } = this.listData
         let result = 'warning'
         domain_whitelist.forEach(item => {
@@ -141,7 +141,7 @@ export default class ProxyEthereum extends React.Component {
         return result
     }
 
-    async getContractSafeType(_address) {
+    async getContractSafeType(_address = '') {
         const { contract_blacklist, contract_whitelist } = this.listData
         let result = 'warning'
         contract_whitelist.forEach(item => {
@@ -228,6 +228,9 @@ export default class ProxyEthereum extends React.Component {
                     if (['transfer'].includes(actionName)) {
                         if (isNative || isContractTransfer) {
                             contractAddress = constList.params[0].to
+                            if(isContractTransfer && contractAddress == null){
+                                return target(...argumentsList);
+                            }
                         } else {
                             const reg = RegExp(/0xa9059cbb000000000000000000000000([a-fA-F0-9]{40})([a-fA-F0-9]{64})/);
                             const matchArr = constList.params[0].data.match(reg);
