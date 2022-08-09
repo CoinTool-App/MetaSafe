@@ -73,7 +73,9 @@ $green: #42b983;
     font-weight: bold;
     padding: 20px 0 14px 0;
     margin: 0;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
     .tipIcon {
       color: #ff9100;
       margin-right: 6px;

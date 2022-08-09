@@ -15,6 +15,8 @@ const translation_en = {
         transfer: 'Send',
         approve_tips: 'Approve warning',
         transfer_tips: 'Transfer warning',
+        eth_sign_tips: 'Sign warning',
+        eth_sign_text_tips: 'Warning. You are signing a transaction that may transfer all your assets! Please make sure the site is trusted',
         cancel: 'Cancel',
         continue: 'Continue',
         try_action: 'You are trying to {{action}} {{type}} <0>{{symbol}}</0> to',
