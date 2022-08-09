@@ -22,7 +22,7 @@ $green: #42b983;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
+    width: 410px;
     padding: 20px;
   }
 }
@@ -53,8 +53,8 @@ $green: #42b983;
     font-size: 16px;
     flex: 1;
     text-align: right;
-
     a {
+      font-size: 16px;
       color: #fff;
       text-decoration: none;
     }
