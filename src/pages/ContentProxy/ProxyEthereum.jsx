@@ -61,16 +61,17 @@ export default class ProxyEthereum extends React.Component {
         }, false);
     }
     getActionInfo(constList) {
-        // console.log(constList, 'constList');
         if (typeof constList.method !== 'undefined') {
             if (constList.method === 'eth_sendTransaction') {
-                const functionName = hexMap[constList.params[0].data.substring(0, 10)];
+                const data = constList.params[0].data
+                const hexStr = typeof data !== 'undefined' ? data.substring(0, 10) : ''
+                const functionName = hexMap[hexStr];
                 if (methodsActionList.includes(functionName)) {
                     return { result: true, action: functionName };
                 }
-                if (constList.params[0].data === '0x' || constList.params[0].data === '' && parseInt(constList.params[0].value) > 0) {
+                if ((data === '0x' || data == '' || typeof data === 'undefined') && parseInt(constList.params[0].value) > 0) {
                     return { result: true, action: 'transfer', isNative: true };
-                } else if (constList.params[0].data !== '' && constList.params[0].data !== '0x' && parseInt(constList.params[0].value) > 0 && !methodsActionList.includes(functionName)) {
+                } else if (typeof data !== 'undefined' && data !== '' && data !== '0x' && parseInt(constList.params[0].value) > 0 && !methodsActionList.includes(functionName)) {
                     return { result: true, action: 'transfer', isContractTransfer: true };
                 }
             } else if(constList.method === 'eth_sign') {
