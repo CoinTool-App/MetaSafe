@@ -8,10 +8,15 @@ import { CheckCircleOutlined, CloseCircleOutlined, ExclamationCircleOutlined, Wa
 
 const hexMap = {
     '0x095ea7b3': 'approve',
+    '095ea7b3': 'approve',
     '0xa22cb465': 'setApprovalForAll',
+    'a22cb465': 'setApprovalForAll',
     '0xa9059cbb': 'transfer',
+    'a9059cbb': 'transfer',
     '0x42842e0e': 'safeTransferFrom',
-    '0x23b872dd': 'transferFrom'
+    '42842e0e': 'safeTransferFrom',
+    '0x23b872dd': 'transferFrom',
+    '23b872dd': 'transferFrom'
 };
 
 const postMessageToCurrentPage = (decision) => {
