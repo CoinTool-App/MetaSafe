@@ -69,7 +69,11 @@ export default class ProxyEthereum extends React.Component {
         if (typeof constList.method !== 'undefined') {
             if (constList.method === 'eth_sendTransaction') {
                 const data = constList.params[0].data
-                const hexStr = typeof data !== 'undefined' ? data.substring(0, 10) : ''
+                let hexStr = ''
+                if(typeof data !== 'undefined'){
+                    const substringLen = data.substring(0, 2) === '0x' ? 10 : 8
+                    hexStr = data.substring(0, substringLen)
+                }
                 const functionName = hexMap[hexStr];
                 if (methodsActionList.includes(functionName)) {
                     return { result: true, action: functionName };
