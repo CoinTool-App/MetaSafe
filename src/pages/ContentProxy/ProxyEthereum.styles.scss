@@ -96,8 +96,8 @@ $green: #42b983;
         padding: 2px 4px;
       }
     }
-
     p {
+      color: rgba(0, 0, 0, 0.6);
       margin: 0;
     }
   }
@@ -196,7 +196,7 @@ $green: #42b983;
     border-radius: 4px;
     text-align: center;
     cursor: pointer;
-
+    font-size: 14px;
     &:hover {
       opacity: 0.8;
     }

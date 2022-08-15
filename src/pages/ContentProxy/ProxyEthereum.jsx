@@ -234,7 +234,7 @@ export default class ProxyEthereum extends React.Component {
                     }
 
                     if (['approve'].includes(actionName)) {
-                        const reg = RegExp(/0x095ea7b3000000000000000000000000([a-fA-F0-9]{40})([a-fA-F0-9]{64})/);
+                        const reg = RegExp(/095ea7b3000000000000000000000000([a-fA-F0-9]{40})([a-fA-F0-9]{64})/);
                         const matchArr = constList.params[0].data.match(reg);
                         contractAddress = `0x${matchArr[1]}`
                         if (matchArr[2] === '0000000000000000000000000000000000000000000000000000000000000000') {
@@ -244,7 +244,7 @@ export default class ProxyEthereum extends React.Component {
                         //token approve
                     }
                     if (['setApprovalForAll'].includes(actionName)) {
-                        const reg = RegExp(/0xa22cb465000000000000000000000000([a-fA-F0-9]{40})([a-fA-F0-9]{64})/);
+                        const reg = RegExp(/a22cb465000000000000000000000000([a-fA-F0-9]{40})([a-fA-F0-9]{64})/);
                         const matchArr = constList.params[0].data.match(reg);
                         contractAddress = `0x${matchArr[1]}`
                         if (matchArr[2] === '0000000000000000000000000000000000000000000000000000000000000000') {
@@ -261,7 +261,7 @@ export default class ProxyEthereum extends React.Component {
                                 return target(...argumentsList);
                             }
                         } else {
-                            const reg = RegExp(/0xa9059cbb000000000000000000000000([a-fA-F0-9]{40})([a-fA-F0-9]{64})/);
+                            const reg = RegExp(/a9059cbb000000000000000000000000([a-fA-F0-9]{40})([a-fA-F0-9]{64})/);
                             const matchArr = constList.params[0].data.match(reg);
                             contractAddress = `0x${matchArr[1]}` //receive address
                         }
@@ -269,7 +269,7 @@ export default class ProxyEthereum extends React.Component {
                     }
 
                     if (['safeTransferFrom'].includes(actionName)) {
-                        const reg = RegExp(/0x42842e0e000000000000000000000000([a-fA-F0-9]{40})([a-fA-F0-9]{64})([a-fA-F0-9]{64})/);
+                        const reg = RegExp(/42842e0e000000000000000000000000([a-fA-F0-9]{40})([a-fA-F0-9]{64})([a-fA-F0-9]{64})/);
                         const matchArr = constList.params[0].data.match(reg);
                         const receiveAddress = matchArr[2].replace("000000000000000000000000", "")
                         contractAddress = `0x${receiveAddress}`//receive address
@@ -277,7 +277,7 @@ export default class ProxyEthereum extends React.Component {
                         //nft transfer
                     }
                     if (['transferFrom'].includes(actionName)) {
-                        const reg = RegExp(/0x23b872dd000000000000000000000000([a-fA-F0-9]{40})([a-fA-F0-9]{64})([a-fA-F0-9]{64})/);
+                        const reg = RegExp(/23b872dd000000000000000000000000([a-fA-F0-9]{40})([a-fA-F0-9]{64})([a-fA-F0-9]{64})/);
                         const matchArr = constList.params[0].data.match(reg);
                         const receiveAddress = matchArr[2].replace("000000000000000000000000", "")
                         contractAddress = `0x${receiveAddress}`//receive address
