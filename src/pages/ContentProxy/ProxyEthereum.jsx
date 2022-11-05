@@ -19,6 +19,8 @@ const hexMap = {
     '23b872dd': 'transferFrom'
 };
 
+const signTypedDataArr = ['eth_signTypedData', 'eth_signTypedData_v1', 'eth_signTypedData_v2', 'eth_signTypedData_v3', 'eth_signTypedData_v4'];
+
 const postMessageToCurrentPage = (decision) => {
     const msg = { msg_key: 'user_decision', value: decision };
     postMessageClient.postMsg(msg);
@@ -66,6 +68,7 @@ export default class ProxyEthereum extends React.Component {
         }, false);
     }
     getActionInfo(constList) {
+        console.log('constList.method', constList.method)
         if (typeof constList.method !== 'undefined') {
             if (constList.method === 'eth_sendTransaction') {
                 const data = constList.params[0].data
@@ -83,8 +86,10 @@ export default class ProxyEthereum extends React.Component {
                 } else if (typeof data !== 'undefined' && data !== '' && data !== '0x' && parseInt(constList.params[0].value) > 0 && !methodsActionList.includes(functionName)) {
                     return { result: true, action: 'transfer', isContractTransfer: true };
                 }
-            } else if (constList.method === 'eth_sign') {
+            } else if (['eth_sign'].includes(constList.method)) {
                 return { result: true, action: 'eth_sign' };
+            } else if (signTypedDataArr.includes(constList.method)) {
+                return { result: true, action: 'eth_signTypedData' };
             }
         }
         return { result: false };
@@ -206,7 +211,9 @@ export default class ProxyEthereum extends React.Component {
         // init proxy
         const handler = {
             async apply(target, thisArg, argumentsList) {
+                console.log('apply')
                 const constList = [...argumentsList][0];
+                console.log('constList', constList)
                 const transInfo = that.getActionInfo(constList)
                 const isNotable = transInfo.result;
                 const actionName = transInfo.action;
@@ -215,6 +222,8 @@ export default class ProxyEthereum extends React.Component {
                     action = 'approve'
                 } else if (['eth_sign'].includes(actionName)) {
                     action = 'eth_sign'
+                } else if (signTypedDataArr.includes(actionName)) {
+                    action = 'eth_signTypedData'
                 } else {
                     action = 'transfer'
                 }
@@ -291,7 +300,7 @@ export default class ProxyEthereum extends React.Component {
                     const domainSafeType = await that.getDomainSafeType(domain)
                     // console.log(domainSafeType)
 
-                    if (actionName !== 'eth_sign') {
+                    if (actionName !== 'eth_sign' && actionName !== 'eth_signTypedData') {
                         tokenAddress = constList.params[0].to;
                     }
                     const contractSafeType = await that.getContractSafeType(contractAddress)
@@ -407,32 +416,31 @@ export default class ProxyEthereum extends React.Component {
 
                             <div className="descBox">
                                 <p className="p1">
-                                    {
-                                        actionName === 'eth_sign' ?
-                                            <Trans i18nKey={`dialog.eth_sign_text_tips`} />
-                                            :
-                                            <Trans
-                                                i18nKey={`dialog.${isContractTransfer ? 'contract_try_action' : 'try_action'}`}
-                                                values={{
-                                                    type: isNFT ? 'NFT' : isNative ? '' : 'Token',
-                                                    action: t(`dialog.${action}`),
-                                                    sendNumber: sendNumber,
-                                                    symbol: `${tokenInfo.symbol}${tokenIdText}`
-                                                }}
-                                                components={[
-                                                    isNative ? <span></span> : <a
-                                                        href={`${link}/address/${tokenAddress}`}
-                                                        target="_blank"
-                                                        className="symbol" rel="noreferrer"
-                                                    />
-                                                ]}
-                                            />
+                                    {actionName === 'eth_sign' ? <Trans i18nKey={`dialog.eth_sign_text_tips`} /> : ''}
 
+                                    {actionName === 'eth_signTypedData' ? <Trans i18nKey={`dialog.eth_signTypedData_text_tips`} /> : ''}
+                                    {!['eth_sign', 'eth_signTypedData'].includes(actionName) ?
+                                        <Trans
+                                            i18nKey={`dialog.${isContractTransfer ? 'contract_try_action' : 'try_action'}`}
+                                            values={{
+                                                type: isNFT ? 'NFT' : isNative ? '' : 'Token',
+                                                action: t(`dialog.${action}`),
+                                                sendNumber: sendNumber,
+                                                symbol: `${tokenInfo.symbol}${tokenIdText}`
+                                            }}
+                                            components={[
+                                                isNative ? <span></span> : <a
+                                                    href={`${link}/address/${tokenAddress}`}
+                                                    target="_blank"
+                                                    className="symbol" rel="noreferrer"
+                                                />
+                                            ]}
+                                        /> : ''
                                     }
                                 </p>
 
                                 {
-                                    actionName === 'eth_sign' ? '' :
+                                    ['eth_sign', 'eth_signTypedData'].includes(actionName) ? '' :
                                         <div className={`addressBox ${contractSafeType === 'danger' ? 'address-danger' : ''}`}>
                                             <a href={`${link}/address/${contractAddress}`} className="addressLink" target="_blank" rel="noreferrer">{contractAddress}</a>
                                         </div>
@@ -461,7 +469,7 @@ export default class ProxyEthereum extends React.Component {
                                         }
 
                                         {
-                                            actionName !== 'eth_sign' ?
+                                            ['eth_sign', 'eth_signTypedData'].includes(actionName) ? '' :
                                                 <div className={`tagBox tagBox-${contractSafeType}`}>
                                                     {this.getResultIcon(contractSafeType)}
                                                     <span className="text">{
@@ -469,12 +477,12 @@ export default class ProxyEthereum extends React.Component {
                                                             type: isContractAddress ? t('dialog.contract') : t('dialog.address')
                                                         })
                                                     }</span>
-                                                </div> : ''
+                                                </div>
                                         }
                                     </div>
                                 </div>
 
-                                <p className="tips" style={{ display: actionName !== 'eth_sign' ? 'block' : 'none' }}>
+                                <p className="tips" style={{ display: ['eth_sign', 'eth_signTypedData'].includes(actionName) ? 'none' : 'block' }}>
                                     {
                                         action === 'approve' ?
                                             isContractAddress ?
